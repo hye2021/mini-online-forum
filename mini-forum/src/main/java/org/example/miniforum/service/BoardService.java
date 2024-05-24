@@ -30,4 +30,10 @@ public class BoardService {
         return boardRepository.findAll(sortedByCreatedAt);
     }
 
+    // id에 해당하는 게시글 조회
+    @Transactional(readOnly = true)
+    public Board findBoardById(long id) {
+        return boardRepository.findById(id).orElse(null);
+    }
+
 }
