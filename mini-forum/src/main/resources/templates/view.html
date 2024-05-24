@@ -10,7 +10,8 @@
         <h2 th:text="${board.title}"></h2>
         <strong>Name: </strong> <span th:text="${board.name}"></span><br>
         <strong>Content: </strong> <span th:text="${board.content}"></span><br>
-        <strong>Created At: </strong> <span th:text="${#temporals.format(board.created_at, 'yyyy/MM/dd hh:mm')}"></span><br>
+        <strong>Created At: </strong> <span th:text="${#temporals.format(board.created_at, 'yyyy/MM/dd HH:mm')}"></span><br>
+        <strong>Updated At: </strong> <span th:text="${#temporals.format(board.updated_at, 'yyyy/MM/dd HH:mm')}"></span><br>
 
         <a th:href="@{/list}"> list </a>
         <a th:href="@{/updateform(id=${board.id})}"> Edit </a>

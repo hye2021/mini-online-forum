@@ -50,7 +50,7 @@ public class BoardController {
         return "writeform";
     }
 
-    @PostMapping("/writeform")
+    @PostMapping("/write")
     public String write(@ModelAttribute Board board,
                         RedirectAttributes redirectAttributes) {
         boardService.saveBoard(board);
@@ -66,18 +66,41 @@ public class BoardController {
         return "deleteform";
     }
 
-    @PostMapping("/deleteform")
+    @PostMapping("/delete")
     public String delete(@ModelAttribute Board board,
                          RedirectAttributes redirectAttributes) {
         String path = "redirect:/list";
         String msg = "게시글이 삭제되었습니다.";
-        boolean result = boardService.deleteBoard(board);
+        boolean result = boardService.checkPassword(board);
         if(!result) {
             msg = "비밀번호가 일치하지 않습니다.";
-            // todo: path = "redirect:/deleteform?id=" + board.getId();
-        }
-        redirectAttributes.addFlashAttribute("message", msg); // todo: dialog 띄우는 코드 작성
+            path = "redirect:/view?id=" + board.getId();
+        } else
+            boardService.deleteBoard(board);
+        redirectAttributes.addFlashAttribute("message", msg); // todo: dialog 띄우는 jquery 작성
+        return path;
+    }
 
+    // 게시글 수정
+    @GetMapping("/updateform")
+    public String updateForm(@RequestParam long id, Model model) {
+        Board board = boardService.findBoardById(id);
+        model.addAttribute("board", board);
+        return "updateform";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Board board,
+                         RedirectAttributes redirectAttributes) {
+        String path = "redirect:/view?id="+board.getId();
+        String msg = "게시글이 수정되었습니다.";
+        boolean result = boardService.checkPassword(board);
+        if(!result) {
+            msg = "비밀번호가 일치하지 않습니다.";
+            path = "redirect:/updateform?id=" + board.getId();
+        } else
+            boardService.saveBoard(board);
+        redirectAttributes.addFlashAttribute("message", msg);
         return path;
     }
 
