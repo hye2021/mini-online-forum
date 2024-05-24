@@ -18,7 +18,6 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public boolean checkPassword(Board board) {
-        System.out.println(board.getId() + " :::::::::::: " + board.getPassword());
         Board baseline = boardRepository.findById(board.getId()).orElse(null);
         assert baseline != null;
         if (baseline.getPassword().equals(board.getPassword()))

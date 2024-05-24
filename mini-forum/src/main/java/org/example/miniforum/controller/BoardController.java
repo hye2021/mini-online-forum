@@ -26,10 +26,6 @@ public class BoardController {
                        @RequestParam(defaultValue="5") int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<Board> boardPage = boardService.findAllBoards(pageable);
-        for(Board board : boardPage) {
-            System.out.println(board.getId());
-        }
-        System.out.println("---------------------");
         model.addAttribute("boardPage", boardPage);
         model.addAttribute("currentPage", page);
         return "list";
@@ -77,7 +73,7 @@ public class BoardController {
             path = "redirect:/view?id=" + board.getId();
         } else
             boardService.deleteBoard(board);
-        redirectAttributes.addFlashAttribute("message", msg); // todo: dialog 띄우는 jquery 작성
+        redirectAttributes.addFlashAttribute("message", msg); // todo: dialog 띄우는 코드 추가
         return path;
     }
 

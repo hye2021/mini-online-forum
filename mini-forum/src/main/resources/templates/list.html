@@ -6,6 +6,8 @@
     <link rel="stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
+    <div th:include="dialog :: dialog"></div>
+
     <h1>Board List</h1>
     <table th:if="${!boardPage.empty}">
         <thead>
