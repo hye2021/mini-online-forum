@@ -35,7 +35,6 @@ public class BoardController {
         return "list";
     }
 
-
     // 글 상세 조회
     @GetMapping("/view")
     public String view(Model model, @RequestParam long id) {
@@ -57,6 +56,29 @@ public class BoardController {
         boardService.saveBoard(board);
         redirectAttributes.addFlashAttribute("message", "새로운 게시글이 등록되었습니다.");
         return "redirect:/list";
+    }
+
+    // 게시글 삭제
+    @GetMapping("/deleteform")
+    public String deleteForm(@RequestParam long id, Model model) {
+        Board board = boardService.findBoardById(id);
+        model.addAttribute("board", board);
+        return "deleteform";
+    }
+
+    @PostMapping("/deleteform")
+    public String delete(@ModelAttribute Board board,
+                         RedirectAttributes redirectAttributes) {
+        String path = "redirect:/list";
+        String msg = "게시글이 삭제되었습니다.";
+        boolean result = boardService.deleteBoard(board);
+        if(!result) {
+            msg = "비밀번호가 일치하지 않습니다.";
+            // todo: path = "redirect:/deleteform?id=" + board.getId();
+        }
+        redirectAttributes.addFlashAttribute("message", msg); // todo: dialog 띄우는 코드 작성
+
+        return path;
     }
 
 

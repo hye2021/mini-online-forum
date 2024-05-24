@@ -13,8 +13,8 @@
         <strong>Created At: </strong> <span th:text="${#temporals.format(board.created_at, 'yyyy/MM/dd hh:mm')}"></span><br>
 
         <a th:href="@{/list}"> list </a>
-        <a th:href="@{/updateForm(id=${board.id})}"> Edit </a>
-        <a th:href="@{/deleteForm(id=${board.id})}"> Delete </a>
+        <a th:href="@{/updateform(id=${board.id})}"> Edit </a>
+        <a th:href="@{/deleteform(id=${board.id})}"> Delete </a>
     </div>
 </body>
 </html>

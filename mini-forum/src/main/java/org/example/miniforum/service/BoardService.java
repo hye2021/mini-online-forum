@@ -44,4 +44,17 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
+    // 게시글 삭제
+    @Transactional
+    public boolean deleteBoard(Board board) {
+        Board baseline = boardRepository.findById(board.getId()).orElse(null);
+        assert baseline != null;
+        if(baseline.getPassword().equals(board.getPassword())) {
+            boardRepository.delete(board);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

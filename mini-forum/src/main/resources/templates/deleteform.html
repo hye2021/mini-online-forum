@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>delete form</title>
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+<body>
+<div class="writebox">
+    <h2>Delete Board</h2>
+    <form th:action="@{/deleteform}" method="post" th:object="${board}">
+        <input type="hidden" name="id" th:value="${param.id}" />
+        <label for="password">Password</label><br>
+        <input type="password" id="password" th:field="*{password}" required><br>
+        <button type="submit">Delete</button>
+    </form>
+</div>
+</body>
+</html>
