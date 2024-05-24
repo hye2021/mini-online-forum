@@ -45,8 +45,24 @@ li a.active {
 }
 
 .box {
-    border: 1px solid #dddddd;
+    border: 1px solid black;
+    background-color: #e6e6e6;
     padding: 20px;
     margin-top: 20px;
     line-height: 2;
+}
+
+.writebox {
+    border: 1px solid black;
+    background-color: #e6e6e6;
+    padding: 20px;
+    margin-top: 20px;
+    line-height: 2;
+    margin: 0 auto;
+    max-width: 480px;
+}
+
+.writebox * {
+    width: 100%;
+    box-sizing: border-box;
 }
